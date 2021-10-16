@@ -42,10 +42,9 @@ class Interfaz():
         logo = Label(self.window, image=imagen)
         logo.place(x=10 ,y=2 ,width=260 , height=240)
 
-        img = Image.open("./img/tablero.png")
+        img = PhotoImage(file="./img/tablero.png")
 
-        board = ImageTk.PhotoImage(img)
-        board = Label(self.window, image=board)
+        board = Label(self.window, image=img)
         board.place(x=400, y=320, width=200, height=200)
 
         #Custom buttons
