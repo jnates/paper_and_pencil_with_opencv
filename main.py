@@ -11,21 +11,21 @@ class Modelo():
 
         # Colors to paint
         colorCeleste = (255,113,82)
-        colorAmarillo = (89,222,255)
-        colorRosa = (128,0,255)
+        colorYellow = (89,222,255)
+        coloRed = (128,0,255)
         colorgreen = (0,255,36)
         colorcleanscreen = (29,112,246) # Solo se usará para el cuadro superior de 'Limpiar Pantalla'
 
         # Upper left box line weight (color to draw)
-        grosorCeleste = 6
-        grosorAmarillo = 2
-        grosorRosa = 2
-        grosorVerde = 2
+        Celeste_thickness = 6
+        yellow_thickness = 2
+        red_thickness = 2
+        green_thickness = 2
 
         # Upper right box line weight (thickness of the marker to draw)
-        grosorPeque = 6
-        grosorMedio = 1
-        grosorGrande = 1
+        small_thickness = 6
+        medium_thickness = 1
+        large_thickness = 1
 
         #--------------------- Variables for the virtual pen / marker -------------------------
         color = colorCeleste  # Input color, and variable that will assign the marker color
@@ -47,26 +47,26 @@ class Modelo():
 
             #------------------------ Upper Section ------------------------------------------
             # Squares drawn in the upper left (represent the color to be drawn)
-            cv2.rectangle(frame,(0,0),(50,50),colorAmarillo,grosorAmarillo)
-            cv2.rectangle(frame,(50,0),(100,50),colorRosa,grosorRosa)
-            cv2.rectangle(frame,(100,0),(150,50),colorgreen,grosorVerde)
-            cv2.rectangle(frame,(150,0),(200,50),colorCeleste,grosorCeleste)
+            cv2.rectangle(frame,(0,0),(50,50),colorYellow,yellow_thickness)
+            cv2.rectangle(frame,(50,0),(100,50),coloRed,red_thickness)
+            cv2.rectangle(frame,(100,0),(150,50),colorgreen,green_thickness)
+            cv2.rectangle(frame,(150,0),(200,50),colorCeleste,Celeste_thickness)
 
-            # Rectángulo superior central, que nos ayudará a limpiar la pantalla
+            # Upper central rectangle, which will help us to clean the screen
             cv2.rectangle(frame,(300,0),(400,50),colorcleanscreen,1)
             cv2.putText(frame,'Limpiar',(320,20),6,0.6,colorcleanscreen,1,cv2.LINE_AA)
             cv2.putText(frame,'pantalla',(320,40),6,0.6,colorcleanscreen,1,cv2.LINE_AA)
 
-            # Cuadrados dibujados en la parte superior derecha (grosor del marcador para dibujar)
-            cv2.rectangle(frame,(490,0),(540,50),(0,0,0),grosorPeque)
+            # Squares drawn at the top right (marker thickness for drawing)
+            cv2.rectangle(frame,(490,0),(540,50),(0,0,0),small_thickness)
             cv2.circle(frame,(515,25),3,(0,0,0),-1)
-            cv2.rectangle(frame,(540,0),(590,50),(0,0,0),grosorMedio)
+            cv2.rectangle(frame,(540,0),(590,50),(0,0,0),medium_thickness)
             cv2.circle(frame,(565,25),7,(0,0,0),-1)
-            cv2.rectangle(frame,(590,0),(640,50),(0,0,0),grosorGrande)
+            cv2.rectangle(frame,(590,0),(640,50),(0,0,0),large_thickness)
             cv2.circle(frame,(615,25),11,(0,0,0),-1)
             #-----------------------------------------------------------------------------------
             
-            # Detección del color celeste
+            # Light blue color detection
             maskCeleste = cv2.inRange(frameHSV, celesteBajo, celesteAlto)
             maskCeleste = cv2.erode(maskCeleste,None,iterations = 1)
             maskCeleste = cv2.dilate(maskCeleste,None,iterations = 2)
@@ -82,44 +82,44 @@ class Modelo():
                     
                     if x1 is not None:
                         if 0 < x2 < 50 and 0 < y2 < 50:
-                            color = colorAmarillo # Color del lápiz/marcador virtual
-                            grosorAmarillo = 6
-                            grosorRosa = 2
-                            grosorVerde = 2
-                            grosorCeleste = 2
+                            color = colorYellow # Virtual pen / marker color
+                            yellow_thickness = 6
+                            red_thickness = 2
+                            green_thickness = 2
+                            Celeste_thickness = 2
                         if 50 < x2 < 100 and 0 < y2 < 50:
-                            color = colorRosa # Color del lápiz/marcador virtual
-                            grosorAmarillo = 2
-                            grosorRosa = 6
-                            grosorVerde = 2
-                            grosorCeleste = 2
+                            color = coloRed # Virtual pen / marker color
+                            yellow_thickness = 2
+                            red_thickness = 6
+                            green_thickness = 2
+                            Celeste_thickness = 2
                         if 100 < x2 < 150 and 0 < y2 < 50:
-                            color = colorgreen # Color del lápiz/marcador virtual
-                            grosorAmarillo = 2
-                            grosorRosa = 2
-                            grosorVerde = 6
-                            grosorCeleste = 2
+                            color = colorgreen # Virtual pen / marker color
+                            yellow_thickness = 2
+                            red_thickness = 2
+                            green_thickness = 6
+                            Celeste_thickness = 2
                         if 150 < x2 < 200 and 0 < y2 < 50:
-                            color = colorCeleste # Color del lápiz/marcador virtual
-                            grosorAmarillo = 2
-                            grosorRosa = 2
-                            grosorVerde = 2
-                            grosorCeleste = 6
+                            color = colorCeleste # Virtual pen / marker color
+                            yellow_thickness = 2
+                            red_thickness = 2
+                            green_thickness = 2
+                            Celeste_thickness = 6
                         if 490 < x2 < 540 and 0 < y2 < 50:
-                            grosor = 3 # Grosor del lápiz/marcador virtual
-                            grosorPeque = 6
-                            grosorMedio = 1
-                            grosorGrande = 1
+                            grosor = 3 # Pen / Virtual Marker Thickness
+                            small_thickness = 6
+                            medium_thickness = 1
+                            large_thickness = 1
                         if 540 < x2 < 590 and 0 < y2 < 50:
-                            grosor = 7 # Grosor del lápiz/marcador virtual
-                            grosorPeque = 1
-                            grosorMedio = 6
-                            grosorGrande = 1
+                            grosor = 7 # Pen / Virtual Marker Thickness
+                            small_thickness = 1
+                            medium_thickness = 6
+                            large_thickness = 1
                         if 590 < x2 < 640 and 0 < y2 < 50:
-                            grosor = 11 # Grosor del lápiz/marcador virtual
-                            grosorPeque = 1
-                            grosorMedio = 1
-                            grosorGrande = 6
+                            grosor = 11 # Pen / Virtual Marker Thickness
+                            small_thickness = 1
+                            medium_thickness = 1
+                            large_thickness = 6
                         if 300 < x2 < 400 and 0 < y2 < 50:
                             cv2.rectangle(frame,(300,0),(400,50),colorcleanscreen,2)
                             cv2.putText(frame,'Limpiar',(320,20),6,0.6,colorcleanscreen,2,cv2.LINE_AA)
@@ -141,7 +141,6 @@ class Modelo():
             frame = cv2.bitwise_and(frame,frame,mask=thInv)
             frame = cv2.add(frame,imAux)
             
-            #cv2.imshow('maskCeleste', maskCeleste)
             cv2.imshow('imAux',imAux)
             cv2.imshow('frame', frame)
             
