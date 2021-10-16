@@ -26,7 +26,7 @@ class Interfaz():
         def close_window():
             self.window.destroy()
 
-        self.window.geometry(f"{position_right}{position_down}")
+        self.window.geometry("+{}+{}".format(position_right,position_down))
 
         menu = Label(self.window, text="MENU", font=("Helvetica",9, "bold"))
         menu.place(x=480,y=280)
